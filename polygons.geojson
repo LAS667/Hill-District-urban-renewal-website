@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "polygons",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{"type":"Feature","properties":{"Name":"I-75 Corridor in Cincinnati","Description":"This corridor was built during urban renewal, and purposefully cut through predominantly black communities. The major interchange in the south connecting the Mill Creek Expressway, I-71, and I-75 (if I remember correctly) was also purposefully built to displace as many black and minority families as possible. The convenience of infrastructure can be at the cost of people.","Alt Names":null},"geometry":{"type":"Polygon","coordinates":[[[-84.522374,39.095628],[-84.521215,39.096186],[-84.518509,39.097044],[-84.519464,39.100219],[-84.522345,39.102425],[-84.525724,39.103806],[-84.529352,39.105327],[-84.530861,39.10788],[-84.530795,39.111337],[-84.530817,39.1134],[-84.531448,39.114659],[-84.534648,39.118637],[-84.535239,39.120825],[-84.536179,39.120784],[-84.5354,39.118241],[-84.532392,39.11424],[-84.531801,39.112719],[-84.532075,39.109879],[-84.53228,39.107899],[-84.531681,39.10604],[-84.527603,39.103571],[-84.525068,39.102225],[-84.523745,39.101003],[-84.522989,39.099474],[-84.522374,39.095628]]]}},
+{"type":"Feature","properties":{"Name":"Rachel Carlson, Andy Warhol, & Roberto Clemente Bridges","Description":null,"Alt Names":null},"geometry":{"type":"Polygon","coordinates":[[[-80.003801,40.446788],[-80.002901,40.444308],[-80.000982,40.444903],[-79.999137,40.445536],[-80.000293,40.447709],[-80.001845,40.447271],[-80.003801,40.446788]]]}}
+]
+}
