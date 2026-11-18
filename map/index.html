@@ -3,138 +3,169 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- ===================================================================== -->
-  <!--  EDIT ZONE: your project title. Change ONLY the text between the tags. -->
-  <!--  Change it in BOTH places below (the <title> and the <h1>).           -->
-  <!-- ===================================================================== -->
   <title>Progress over People in Pittsburgh</title>
-
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
-    html, body { margin:0; height:100%; font-family:'Helvetica Neue',system-ui,sans-serif; background:#0b1020; }
-    #map { height:100%; width:100%; background:#0b1020; }
-    .title-card{ position:absolute; top:18px; left:18px; z-index:1000; background:rgba(16,22,40,0.88); color:#eaf0ff; padding:16px 20px; border-radius:10px; max-width:300px; border:1px solid rgba(120,160,255,0.25); box-shadow:0 4px 30px rgba(0,0,0,0.6); }
-    .title-card h1{ margin:0 0 6px; font-size:1.2rem; font-weight:700; color:#fff; }
-    .title-card p{ margin:0; font-size:0.82rem; color:#9fb3d9; line-height:1.5; }
-    .legend{ position:absolute; bottom:24px; left:18px; z-index:1000; background:rgba(16,22,40,0.88); color:#cdd8f0; padding:12px 16px; border-radius:10px; font-size:0.8rem; border:1px solid rgba(120,160,255,0.25); box-shadow:0 4px 30px rgba(0,0,0,0.6); }
-    .legend .row{ display:flex; align-items:center; margin:5px 0; }
-    .legend .dot{ width:12px; height:12px; border-radius:50%; margin-right:9px; }
-    .legend .within{ background:#ff6b4a; box-shadow:0 0 8px #ff6b4a; }
-    .legend .connected{ background:#4ad8ff; box-shadow:0 0 8px #4ad8ff; }
-    .legend .flow{ width:20px; height:0; border-top:2px solid #ffd36b; margin-right:7px; box-shadow:0 0 6px #ffd36b; }
-    .legend .poly{ width:12px; height:12px; background:rgba(120,160,255,0.25); border:1px solid #7aa0ff; margin-right:9px; }
-    .leaflet-popup-content-wrapper{ background:#121831; color:#eaf0ff; border-radius:8px; box-shadow:0 6px 30px rgba(0,0,0,0.7); }
-    .leaflet-popup-tip{ background:#121831; }
-    .leaflet-popup-content{ margin:0; }
-    .pop{ width:240px; }
-    .pop .hdr{ padding:11px 15px; border-radius:8px 8px 0 0; }
-    .pop .hdr.within{ background:linear-gradient(135deg,#ff6b4a,#c0392b); }
-    .pop .hdr.connected{ background:linear-gradient(135deg,#4ad8ff,#2b7fa3); }
-    .pop .hdr.neutral{ background:linear-gradient(135deg,#7aa0ff,#4a5fa3); }
-    .pop .hdr .name{ font-size:1.1rem; font-weight:700; color:#fff; }
-    .pop .hdr .date{ font-size:0.72rem; color:rgba(255,255,255,0.85); margin-top:3px; letter-spacing:0.08em; text-transform:uppercase; }
-    .pop .body{ padding:12px 15px; }
-    .pop .desc{ font-size:0.88rem; line-height:1.5; color:#dfe7f7; margin-bottom:10px; }
-    .pop .meta{ font-size:0.75rem; color:#90a2c8; border-top:1px solid rgba(255,255,255,0.1); padding-top:8px; }
-    .pop .meta div{ margin:2px 0; } .pop .meta b{ color:#cdd8f0; }
-    .place-label{ background:transparent; border:none; box-shadow:none; color:#eaf0ff; font-size:11px; font-weight:600; text-shadow:0 0 4px #0b1020,0 0 6px #0b1020; }
-    .leaflet-control-layers{ background:rgba(16,22,40,0.9); color:#cdd8f0; border:1px solid rgba(120,160,255,0.25); border-radius:8px; }
-    .leaflet-control-layers label{ color:#cdd8f0; }
-    .leaflet-bar a{ background:#121831; color:#cdd8f0; border-color:#2a3350; }
-    @keyframes flow { to { stroke-dashoffset:-1000; } }
-    .flow-line{ stroke-dasharray:8 12; animation:flow 30s linear infinite; }
+    html, body { margin: 0; height: 100%; font-family: Georgia, 'Times New Roman', serif; background: #e8dfc8; }
+    #map { height: 100%; width: 100%; background: #e8dfc8; }
+    /* a soft, aged-paper wash over the map, so the places stand out */
+    .leaflet-tile-pane { filter: sepia(0.55) saturate(0.7) contrast(0.95) brightness(1.04); }
+
+    .title-card { position: absolute; top: 16px; left: 16px; z-index: 1000; background: #fbf3e0; color: #3b2a18; padding: 16px 20px;
+      border-radius: 4px; max-width: 340px; border: 1px solid #d8c28f; border-left: 6px solid #8b1e1e; box-shadow: 0 2px 14px rgba(60,40,20,0.35); }
+    .title-card h1 { margin: 0 0 6px; font-size: 1.3rem; color: #6b1414; line-height: 1.2; }
+    .title-card p { margin: 0 0 8px; font-size: 0.88rem; color: #4a3a22; line-height: 1.45; }
+    .title-card .note { margin: 0; font-size: 0.78rem; color: #7a6646; font-style: italic; }
+    .notice { position: absolute; top: 18px; right: 16px; z-index: 1000; background: #fff3cd; border: 1px solid #e0c36a;
+      padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; max-width: 320px; font-family: system-ui, sans-serif; }
+    .notice[hidden] { display: none; }
+
+    .leaflet-popup-content-wrapper { background: #fbf3e0; color: #3b2a18; border-radius: 5px; box-shadow: 0 3px 16px rgba(60,40,20,0.4); padding: 0; overflow: hidden; }
+    .leaflet-popup-content { margin: 0; width: 250px !important; }
+    .leaflet-popup-tip { background: #fbf3e0; }
+    .pop .hdr { padding: 10px 14px; color: #fff; }
+    .pop .hdr.main { background: #8b1e1e; } .pop .hdr.within { background: #b5622a; } .pop .hdr.connected { background: #2f6d74; }
+    .pop .hdr.street { background: #5a5a5a; } .pop .hdr.area { background: #7a6646; }
+    .pop .name { font-size: 1.05rem; font-weight: 700; line-height: 1.25; }
+    .pop .date { font-family: system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.9; margin-top: 3px; }
+    .pop .body { padding: 12px 14px; }
+    .pop .desc { font-size: 0.9rem; line-height: 1.5; }
+    .pop .meta { font-family: system-ui, sans-serif; font-size: 0.74rem; color: #7a6646; border-top: 1px solid #e3d3a8; margin-top: 10px; padding-top: 8px; }
+    .pop .meta div { margin: 2px 0; }
+
+    .legend { background: #fbf3e0; color: #4a3a22; padding: 12px 16px; border-radius: 4px; font-size: 0.82rem; line-height: 1.5;
+      border: 1px solid #d8c28f; box-shadow: 0 2px 14px rgba(60,40,20,0.35); max-width: 270px; }
+    .legend h2 { margin: 0 0 6px; font-size: 0.9rem; color: #6b1414; }
+    .legend div { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+    .place-label { background: transparent; border: none; box-shadow: none; font-size: 11px; font-weight: 700; color: #3b2a18;
+      text-shadow: 0 0 3px #fbf3e0, 0 0 3px #fbf3e0, 0 0 4px #fbf3e0; }
+    .leaflet-bar a { background: #fbf3e0; color: #4a3a22; }
+    @keyframes flow { to { stroke-dashoffset: -1000; } }
+    .flow-line { stroke-dasharray: 8 12; animation: flow 30s linear infinite; }
+    @media (prefers-reduced-motion: reduce) { .flow-line { animation: none; } }
+    @media (max-width: 600px) { .title-card { right: 16px; max-width: none; } .legend { font-size: 0.75rem; max-width: 210px; } }
   </style>
 </head>
 <body>
+  <!-- EDIT: change the title and the lines below to your own words -->
   <div class="title-card">
-    <!-- EDIT ZONE: change this heading to your project title -->
     <h1>Progress over People in Pittsburgh</h1>
-    <p>The movement of people from urban renewal & redlining in the Steel City</p>
+    <p>How urban renewal and redlining changed Pittsburgh's Hill District, and what it meant for the people who lived there.</p>
+    <p class="note">Click a place to read about it. Locations are approximate.</p>
   </div>
-  <div class="legend">
-    <div class="row"><span class="dot within"></span>Within</div>
-    <div class="row"><span class="dot connected"></span>Connected</div>
-    <div class="row"><span class="flow"></span>Connection</div>
-    <div class="row"><span class="poly"></span>Region</div>
-  </div>
+  <div class="notice" id="notice" hidden></div>
   <div id="map"></div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    const map = L.map("map").setView([20,20],3);
+  // ===============================================================
+  // SETTINGS
+  // ===============================================================
+  var COLORS = { main: "#8b1e1e", within: "#b5622a", connected: "#2f6d74", gold: "#d99a00", area: "#8b1e1e", street: "#4a4a4a", lost: "#8b1e1e" };
+  var FALLBACK_VIEW = [40.4483, -79.9740, 14];   // centre of the Hill District, used if no data is found
 
-    // Free dark basemap from Esri (no API key). Do not change this.
-    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",{
-      maxZoom:16, attribution:"Tiles &copy; Esri"
-    }).addTo(map);
+  // ===============================================================
+  // MAP (standard OpenStreetMap background: no account or key needed)
+  // ===============================================================
+  var map = L.map("map");
+  var osm = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
+  // If the standard map keeps failing to load, switch to this backup map by itself.
+  var backup = L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { subdomains: "abcd", maxZoom: 20,
+    attribution: "&copy; OpenStreetMap contributors &copy; CARTO" });
+  var tileErrors = 0;
+  osm.on("tileerror", function () { tileErrors++; if (tileErrors === 6 && map.hasLayer(osm)) { map.removeLayer(osm); backup.addTo(map); } });
+  map.setView([FALLBACK_VIEW[0], FALLBACK_VIEW[1]], FALLBACK_VIEW[2]);
 
-    function clean(v){ return (v===null||v===undefined)?"":String(v).trim(); }
-    function cat(p){ return clean(p.type || p.Type).toLowerCase(); }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function clean(v) { return (v === null || v === undefined) ? "" : String(v).trim(); }
 
-    function popupHtml(p){
-      const name=clean(p.Name)||clean(p.name)||"Untitled", date=clean(p.Date)||clean(p.date),
-            desc=clean(p.Description)||clean(p.description), src=clean(p.Source)||clean(p.source),
-            kind=clean(p.kind)||clean(p.Kind), c=cat(p);
-      const hc=(c==="within")?"within":(c==="connected")?"connected":"neutral";
-      let h='<div class="pop"><div class="hdr '+hc+'"><div class="name">'+name+'</div>';
-      if(date) h+='<div class="date">'+date+'</div>';
-      h+='</div><div class="body">';
-      if(desc) h+='<div class="desc">'+desc+'</div>';
-      let m=""; if(kind) m+='<div><b>Type:</b> '+kind+'</div>'; if(src) m+='<div><b>Source:</b> '+src+'</div>';
-      if(m) h+='<div class="meta">'+m+'</div>';
-      return h+'</div></div>';
-    }
+  // The popup. The description is shown as written, so a photo can be added to it with an img tag, as in the class guide.
+  function popupHtml(p, kind) {
+    var date = clean(p.Date), src = clean(p.Source), cert = clean(p.Certainty);
+    var meta = (src ? "<div>Source: " + esc(src) + "</div>" : "") + (cert ? "<div>Location: " + esc(cert) + "</div>" : "");
+    return '<div class="pop"><div class="hdr ' + kind + '"><div class="name">' + esc(clean(p.Name) || "Untitled") + "</div>" +
+      (date ? '<div class="date">' + esc(date) + "</div>" : "") + '</div><div class="body">' +
+      '<div class="desc">' + clean(p.Description) + "</div>" + (meta ? '<div class="meta">' + meta + "</div>" : "") + "</div></div>";
+  }
 
-    const pointsLayer=L.layerGroup(), flowLayer=L.layerGroup(), linesLayer=L.layerGroup(), polyLayer=L.layerGroup();
-    const allBounds=[];
-    function remember(l){ if(l.getBounds&&l.getBounds().isValid()) allBounds.push(l.getBounds()); }
-    function fit(){ if(!allBounds.length) return; let b=allBounds[0]; for(let i=1;i<allBounds.length;i++) b=b.extend(allBounds[i]); map.fitBounds(b,{padding:[70,70]}); }
+  // ===============================================================
+  // BUILD THE MAP FROM THE THREE FILES
+  // ===============================================================
+  var allBounds = null, mainPoint = null, connected = [], count = 0;
+  function extend(b) { if (b && b.isValid()) { allBounds = allBounds ? allBounds.extend(b) : L.latLngBounds(b.getSouthWest(), b.getNorthEast()); } }
 
-    function curve(a,b){
-      const offset=Math.hypot(b[0]-a[0],b[1]-a[1])*0.15;
-      const mid=[(a[0]+b[0])/2+offset,(a[1]+b[1])/2]; const pts=[]; const steps=40;
-      for(let t=0;t<=steps;t++){ const u=t/steps;
-        pts.push([(1-u)*(1-u)*a[0]+2*(1-u)*u*mid[0]+u*u*b[0], (1-u)*(1-u)*a[1]+2*(1-u)*u*mid[1]+u*u*b[1]]); }
-      return pts;
-    }
+  function addPolygons(data) {
+    (data.features || []).forEach(function (f) {
+      if (!f.geometry) return; count++;
+      var p = f.properties || {}, g = clean(p.Group).toLowerCase(), approx = /yes|true/i.test(clean(p.Approximate));
+      var color = /zon/.test(g) ? "#222222" : COLORS.area;
+      var style = { color: color, weight: approx ? 2.5 : 3, dashArray: approx ? "3 7" : (/redlin|holc/.test(g) ? "10 6" : null), fillColor: color, fillOpacity: /zon/.test(g) ? 0 : 0.14 };
+      var lyr = L.geoJSON(f, { style: style }).bindPopup(popupHtml(p, "area")).bindTooltip(esc(clean(p.Name) || "Area"), { sticky: true }).addTo(map);
+      extend(lyr.getBounds());
+    });
+  }
+  function addLines(data) {
+    (data.features || []).forEach(function (f) {
+      if (!f.geometry) return; count++;
+      var p = f.properties || {}, lost = /lost|demolish/i.test(clean(p.Group) + " " + clean(p.Status));
+      var style = lost ? { color: COLORS.lost, weight: 5, dashArray: "2 9", lineCap: "round" } : { color: COLORS.street, weight: 4 };
+      var lyr = L.geoJSON(f, { style: style }).bindPopup(popupHtml(p, "street")).bindTooltip(esc(clean(p.Name) || "Street"), { sticky: true }).addTo(map);
+      extend(lyr.getBounds());
+    });
+  }
+  function addPoints(data) {
+    (data.features || []).forEach(function (f) {
+      if (!f.geometry || f.geometry.type !== "Point") return; count++;
+      var p = f.properties || {}, typ = clean(p.Type || p.type).toLowerCase();
+      var isMain = /yes|true/i.test(clean(p.Main)) || /\bMAIN\b/.test(clean(p.Description)), isConn = typ === "connected";
+      var kind = isMain ? "main" : (isConn ? "connected" : "within");
+      var lyr = L.geoJSON(f, { pointToLayer: function (feat, ll) {
+        return L.circleMarker(ll, { radius: isMain ? 14 : 8, fillColor: COLORS[kind], color: "#fbf3e0", weight: isMain ? 4 : 2, fillOpacity: 0.95 });
+      } }).bindPopup(popupHtml(p, kind), { maxWidth: 260 }).bindTooltip(esc(clean(p.Name) || "Place"), { direction: "right", className: "place-label", offset: [10, 0] }).addTo(map);
+      var ll = L.latLng(f.geometry.coordinates[1], f.geometry.coordinates[0]);
+      extend(L.latLngBounds([ll, ll]));
+      if (isMain) mainPoint = ll; else if (isConn) connected.push({ ll: ll, name: clean(p.Name) });
+    });
+  }
+  function addConnections() {
+    if (!mainPoint) return;
+    connected.forEach(function (c) {
+      L.polyline([mainPoint, c.ll], { color: COLORS.gold, weight: 3, opacity: 0.9, className: "flow-line" })
+        .bindTooltip(esc("From the main place to " + c.name), { sticky: true }).addTo(map);
+    });
+  }
 
-    fetch("points.geojson").then(r=>r.json()).then(function(data){
-      let mainLatLng=null; const connected=[];
-      const gj=L.geoJSON(data,{
-        pointToLayer:function(f,latlng){
-          const p=f.properties||{}, c=cat(p);
-          const isWithin=(c==="within");
-          // colour: within = orange, connected = cyan, no type = soft blue (still looks fine)
-          const color = isWithin?"#ff6b4a" : (c==="connected"?"#4ad8ff":"#8aa6e0");
-          if(clean(p.Description).toUpperCase().indexOf("MAIN")>-1) mainLatLng=latlng;
-          if(c==="connected") connected.push(latlng);
-          return L.circleMarker(latlng,{radius:isWithin?9:7,fillColor:color,color:"#fff",weight:1.5,fillOpacity:0.95});
-        },
-        onEachFeature:function(f,layer){
-          layer.bindPopup(popupHtml(f.properties||{}),{maxWidth:250});
-          const nm=clean((f.properties||{}).Name)||clean((f.properties||{}).name);
-          if(nm) layer.bindTooltip(nm,{permanent:true,direction:"right",className:"place-label",offset:[8,0]});
-        }
-      });
-      gj.addTo(pointsLayer); remember(gj);
-      if(!mainLatLng && gj.getLayers().length && gj.getLayers()[0].getLatLng) mainLatLng=gj.getLayers()[0].getLatLng();
-      if(mainLatLng){ connected.forEach(function(ll){ L.polyline(curve([mainLatLng.lat,mainLatLng.lng],[ll.lat,ll.lng]),{color:"#ffd36b",weight:2,opacity:0.7,className:"flow-line"}).addTo(flowLayer); }); }
-      fit();
-    }).catch(e=>console.warn("points:",e));
+  function load(file) { return fetch(file).then(function (r) { if (!r.ok) throw new Error(file + " " + r.status); return r.json(); }); }
+  Promise.allSettled([load("polygons.geojson"), load("lines.geojson"), load("points.geojson")]).then(function (res) {
+    var names = ["polygons.geojson", "lines.geojson", "points.geojson"], missing = [];
+    if (res[0].status === "fulfilled") addPolygons(res[0].value); else missing.push(names[0]);
+    if (res[1].status === "fulfilled") addLines(res[1].value); else missing.push(names[1]);
+    if (res[2].status === "fulfilled") addPoints(res[2].value); else missing.push(names[2]);
+    addConnections();
+    var n = document.getElementById("notice");
+    if (missing.length) { n.textContent = "These files could not be loaded: " + missing.join(", ") + ". Check their names and that they are in the same folder as index.html."; n.hidden = false; }
+    else if (!count) { n.textContent = "The files loaded but contain no places yet. Add your places and refresh."; n.hidden = false; }
+    if (allBounds) map.fitBounds(allBounds, { padding: [60, 60] });
+  });
 
-    fetch("lines.geojson").then(r=>r.json()).then(function(data){
-      const gj=L.geoJSON(data,{style:{color:"#9b7bff",weight:2.5,opacity:0.85,dashArray:"7 7"},onEachFeature:function(f,l){l.bindPopup(popupHtml(f.properties||{}));}});
-      gj.addTo(linesLayer); remember(gj); fit();
-    }).catch(e=>console.warn("lines:",e));
-
-    fetch("polygons.geojson").then(r=>r.json()).then(function(data){
-      const gj=L.geoJSON(data,{style:{color:"#7aa0ff",weight:1.5,fillColor:"#7aa0ff",fillOpacity:0.12},onEachFeature:function(f,l){l.bindPopup(popupHtml(f.properties||{}));}});
-      gj.addTo(polyLayer); remember(gj); fit();
-    }).catch(e=>console.warn("polygons:",e));
-
-    flowLayer.addTo(map); polyLayer.addTo(map); linesLayer.addTo(map); pointsLayer.addTo(map);
-    L.control.layers(null,{"Places":pointsLayer,"Connections":flowLayer,"Routes":linesLayer,"Regions":polyLayer},{collapsed:false}).addTo(map);
+  // ===============================================================
+  // KEY
+  // ===============================================================
+  var legend = L.control({ position: "bottomleft" });
+  legend.onAdd = function () {
+    var div = L.DomUtil.create("div", "legend");
+    function dot(c, r) { return '<svg width="30" height="22" aria-hidden="true"><circle cx="15" cy="11" r="' + r + '" fill="' + c + '" stroke="#fbf3e0" stroke-width="2"/></svg>'; }
+    div.innerHTML = "<h2>Key</h2>" +
+      "<div>" + dot(COLORS.main, 9) + "Main place</div>" +
+      "<div>" + dot(COLORS.within, 6) + "Place in the Hill District</div>" +
+      "<div>" + dot(COLORS.connected, 6) + "Connected place</div>" +
+      '<div><svg width="30" height="12" aria-hidden="true"><line x1="1" y1="6" x2="29" y2="6" stroke="' + COLORS.gold + '" stroke-width="3" stroke-dasharray="8 5"/></svg>Link to the main place</div>' +
+      '<div><svg width="30" height="12" aria-hidden="true"><line x1="1" y1="6" x2="29" y2="6" stroke="' + COLORS.street + '" stroke-width="4"/></svg>Street that still exists</div>' +
+      '<div><svg width="30" height="14" aria-hidden="true"><rect x="1" y="2" width="28" height="10" fill="' + COLORS.area + '" fill-opacity="0.14" stroke="' + COLORS.area + '" stroke-width="2" stroke-dasharray="3 5"/></svg>Approximate area</div>';
+    L.DomEvent.disableClickPropagation(div); return div;
+  };
+  legend.addTo(map);
   </script>
 </body>
 </html>

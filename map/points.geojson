@@ -1,10 +1,219 @@
 {
-"type": "FeatureCollection",
-"name": "newpoints",
-"features": [
-{"type":"Feature","properties":{"label":"Pittsburgh - Pennsylvania, United States","Alt names":"Fort Duquesne, Fort Pitt, Fort Trent, Hothawikamiki, Menachk-sink, Pitts-Bourg, The Manor of Pittsburgh","Description":"MAIN PLACE","Type":null},"bbox":[-79.996754,40.439375,-79.996754,40.439375],"geometry":{"type":"Point","coordinates":[-79.996754,40.439375]}},
-{"type":"Feature","properties":{"label":"East Liberty - Pittsburgh, Pennsylvania, United States","Alt names":null,"Type":"Within"},"bbox":[-79.92483,40.46141,-79.92483,40.46141],"geometry":{"type":"Point","coordinates":[-79.92483,40.46141]}},
-{"type":"Feature","properties":{"label":"Oakland - Pittsburgh, Pennsylvania, United States","Alt names":null,"Type":"Within"},"bbox":[-79.956602,40.439182,-79.956602,40.439182],"geometry":{"type":"Point","coordinates":[-79.956602,40.439182]}},
-{"type":"Feature","properties":{"label":"Hill District - Pittsburgh, Pennsylvania, United States","Alt names":null,"Type":"Within"},"bbox":[-79.978894,40.444349,-79.978894,40.444349],"geometry":{"type":"Point","coordinates":[-79.978894,40.444349]}}
-]
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Civic Arena (Civic Auditorium)",
+        "Date": "1961",
+        "Type": "within",
+        "Description": "Built on the cleared Lower Hill District. Construction began on March 12, 1958, and the arena opened on September 17, 1961. The city used eminent domain to displace about 8,000 residents and 400 businesses from the Lower Hill to make room for it. The arena was demolished between September 2011 and March 2012. This is the main place on the map: the gold lines run from here to where people moved.",
+        "Source": "Wikipedia, \"Civic Arena (Pittsburgh)\"; WPXI, \"This day: September 17, 1961, Civic Arena grand opening\"",
+        "Certainty": "Location from the coordinates given on Wikipedia (40 deg 26 min 30 sec N, 79 deg 59 min 24 sec W)",
+        "Main": "yes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.99,
+          40.44167
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Crawford Grill No. 2",
+        "Date": "1943",
+        "Type": "within",
+        "Description": "Gus Greenlee opened the second Crawford Grill at 2141 Wylie Avenue, at the corner of Elmore Street, in 1943 (some sources say 1945). It opened while the first Crawford Grill still stood in the Lower Hill, and it kept the Hill District's jazz tradition going after the Lower Hill was cleared. The 1917 Sochatoff Building that housed it still stands.",
+        "Source": "Pennsylvania Historic Preservation; Secret Pittsburgh (University of Pittsburgh); Heinz History Center; Historical Marker Database",
+        "Certainty": "Location is the intersection of Wylie Avenue and Elmore Street, from the Historical Marker Database listing (40 deg 26.731 min N, 79 deg 58.676 min W). It is accurate to the building, within a few tens of metres."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.97793,
+          40.44552
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Robert L. Vann marker (Pittsburgh Courier), Terrace Village",
+        "Type": "within",
+        "Description": "State historical marker on Centre Avenue at Francis Street, in the Terrace Village part of the Hill District, for Robert Lee Vann (1879-1940). Vann was publisher and editor of the Pittsburgh Courier from 1910 to 1940. The Courier was a leading Black newspaper.",
+        "Source": "Historical Marker Database (marker 40887); Wikipedia, List of Pennsylvania state historical markers in Allegheny County",
+        "Certainty": "Location from the state historical marker coordinates published by the Pennsylvania Historical and Museum Commission (as listed on Wikipedia). It is accurate to the marker, not necessarily to the original building.",
+        "Date": "1910"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.967413,
+          40.447057
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Art Blakey marker, Chauncey Street",
+        "Type": "within",
+        "Description": "State historical marker at 617 Chauncey Street in the Hill District for the jazz drummer Art Blakey (1919-1990).",
+        "Source": "Wikipedia, List of Pennsylvania state historical markers in Allegheny County (Pennsylvania Historical and Museum Commission)",
+        "Certainty": "Location from the state historical marker coordinates published by the Pennsylvania Historical and Museum Commission (as listed on Wikipedia). It is accurate to the marker, not necessarily to the original building.",
+        "Date": "1919"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.97358,
+          40.4479
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "National Negro Opera Company marker, Homewood",
+        "Type": "connected",
+        "Description": "State historical marker at 7101 Apple Street in Homewood for the National Negro Opera Company, an African American opera company founded in 1941. Homewood was one of the neighbourhoods that Hill District residents moved to.",
+        "Source": "Wikipedia, List of Pennsylvania state historical markers in Allegheny County (Pennsylvania Historical and Museum Commission); Luke's project notes for the destination neighbourhoods",
+        "Certainty": "Location from the state historical marker coordinates published by the Pennsylvania Historical and Museum Commission (as listed on Wikipedia). It is accurate to the marker, not necessarily to the original building. Check the founding date against your own sources.",
+        "Date": "1941"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.89571,
+          40.4642
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Greenlee Field",
+        "Type": "within",
+        "Description": "Ballpark built by Gus Greenlee in the Hill District, at Bedford Avenue and Junilla Street, for his Pittsburgh Crawfords. It was demolished after the 1938 season. A state historical marker was dedicated in 2009.",
+        "Source": "Dead Ball Baseball, Gus Greenlee's Field in Pittsburgh's Hill District; Wikipedia, List of Pennsylvania state historical markers in Allegheny County",
+        "Certainty": "Location from the state historical marker coordinates published by the Pennsylvania Historical and Museum Commission (as listed on Wikipedia). It is accurate to the marker, not necessarily to the original building.",
+        "Date": "1938"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.973,
+          40.4506
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "August Wilson house marker, 1727 Bedford Avenue",
+        "Type": "within",
+        "Description": "State historical marker at 1727 Bedford Avenue. The playwright August Wilson (1945-2005) was born in the Hill District, and the plays of his American Century Cycle, with one exception, are set there.",
+        "Source": "Historical Marker Database (marker 48884); Wikipedia, List of Pennsylvania state historical markers in Allegheny County",
+        "Certainty": "Location from the state historical marker coordinates published by the Pennsylvania Historical and Museum Commission (as listed on Wikipedia). It is accurate to the marker, not necessarily to the original building.",
+        "Date": "1945"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.98542,
+          40.44521
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Union Local 471 (Black musicians' union) marker, Crawford Avenue at Webster Avenue",
+        "Type": "within",
+        "Description": "State historical marker (dedicated 2012) for Local 471 of the American Federation of Musicians. Its topics are African American history, labor, and music. It stands directly above the former Civic Arena site.",
+        "Source": "Historical Marker Database (marker 56705); Wikipedia, List of Pennsylvania state historical markers in Allegheny County",
+        "Certainty": "Location from the state historical marker coordinates published by the Pennsylvania Historical and Museum Commission (as listed on Wikipedia). It is accurate to the marker, not necessarily to the original building."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.9874,
+          40.4431
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Bethel AME Church marker, First Avenue at Smithfield Street",
+        "Type": "connected",
+        "Description": "State historical marker (dedicated September 24, 1995) for Bethel A.M.E. Church, Downtown. Bethel, founded in 1808, is Pittsburgh's oldest Black congregation. Its building at Wylie Avenue and Elm Street in the Lower Hill was taken by eminent domain and demolished in 1957.",
+        "Source": "Wikipedia, List of Pennsylvania state historical markers in Allegheny County; PublicSource; Union Progress, April 15, 2023",
+        "Certainty": "Location from the state historical marker coordinates published by the Pennsylvania Historical and Museum Commission (as listed on Wikipedia). It is accurate to the marker, not necessarily to the original building."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.0005,
+          40.43716
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "East Liberty Presbyterian Church",
+        "Type": "connected",
+        "Description": "Landmark church built 1931-1935, at the centre of the East Liberty business district. Wikipedia's account of East Liberty says two decisions in the 1960s made worse the trends that began with redlining. East Liberty was one of the neighbourhoods that Hill District residents moved to.",
+        "Source": "Historical Marker Database (marker 122315); Wikipedia, East Liberty (Pittsburgh)",
+        "Certainty": "Location from the marker coordinates (40 deg 27.682 min N, 79 deg 55.528 min W).",
+        "Date": "1935"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.925467,
+          40.461367
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Penn Circle East (East Liberty urban renewal)",
+        "Type": "connected",
+        "Description": "In the 1960s an urban renewal project rerouted Penn Avenue traffic into a one-way loop, Penn Circle, around the East Liberty business district. In recent years the loop has been converted back to two-way streets, and its street names are being returned to their earlier ones (Penn Circle East becomes Centre Avenue).",
+        "Source": "Pittsburgh Magazine, The latest sign that East Liberty is back? Signs.; East Liberty Development Inc., Penn Circle name changes",
+        "Certainty": "Location from the address of a marker at 238 Penn Circle East (40 deg 27.76 min N, 79 deg 55.281 min W). Accurate to within about 50 metres.",
+        "Date": "1960s"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.92135,
+          40.462667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Westinghouse High School marker (Billy Strayhorn), Homewood",
+        "Type": "connected",
+        "Description": "State historical marker at Westinghouse High School, 1101 North Murtland Street, Homewood, for the composer Billy Strayhorn (1915-1967). It anchors Homewood on the map.",
+        "Source": "Wikipedia, List of Pennsylvania state historical markers in Allegheny County (Pennsylvania Historical and Museum Commission)",
+        "Certainty": "Location from the state historical marker coordinates published by the Pennsylvania Historical and Museum Commission (as listed on Wikipedia). It is accurate to the marker, not necessarily to the original building."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.9003,
+          40.4606
+        ]
+      }
+    }
+  ]
 }
