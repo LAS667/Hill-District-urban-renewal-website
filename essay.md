@@ -5,7 +5,6 @@ title: The Essay
 
 {% include nav.html %}
 
-HOW TO ADD BLOCK QUOTES
 > this is an example of a quote, the greater than sign turns it into a block quote.
 >
 > Author, *Title* (Year), page.[^3]
